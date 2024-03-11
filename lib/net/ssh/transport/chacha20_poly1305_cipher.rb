@@ -74,9 +74,9 @@ module Net
 
           iv_data[0] = 1.chr
           @chacha_main.iv = iv_data
-          unencrypted_data = @chacha_main.update(data[4..])
+          unencrypted_data = @chacha_main.update(data[4..-1])
           begin
-            ok = @poly.verify(poly_key, mac, data[0..])
+            ok = @poly.verify(poly_key, mac, data[0..-1])
             raise Net::SSH::Exception, "corrupted hmac detected #{name}" unless ok
           rescue RbNaCl::BadAuthenticatorError
             raise Net::SSH::Exception, "corrupted hmac detected #{name}"

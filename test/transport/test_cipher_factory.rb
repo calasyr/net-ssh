@@ -260,7 +260,7 @@ module Transport
       cipher = factory.get(type, OPTIONS_CHACHAPOLY.merge(encrypt: true))
       sequence_number = 1
       result = cipher.update_cipher_mac(TEXT.dup[0...64], sequence_number)
-      result << cipher.update_cipher_mac(TEXT.dup[64...], sequence_number + 1)
+      result << cipher.update_cipher_mac(TEXT.dup[64..-1]], sequence_number + 1)
       result
     end
 
